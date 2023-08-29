@@ -19,7 +19,7 @@ Local Notation "¬ A" := (Complement _ A)
 
 Local Arguments Empty_set {U}.
 Local Arguments Full_set {U}.
-Hint Resolve Full_intro : sets.
+
 
 Theorem intersection_char {X} (A B : Ensemble X) x :
     (x in A inter B) = (x in A /\ x in B).
