@@ -48,6 +48,64 @@ Proof.
     exact H0.
 Qed.
 
+Theorem abcd_c : forall (A:Set)(a b c d:A), a=c \/ b= c \/ c=c \/ d=c.
+Proof.
+    intros.
+    right.
+    right.
+    left.
+    reflexivity.
+Qed.
+
+Lemma and_assoc : forall A B C:Prop, A /\ (B /\ C) -> (A /\ B) /\ C.
+Proof.
+    intros A B C [a [b c]].
+    repeat split.
+    exact a.
+    exact b.
+    exact c.
+Qed.
+
+
+Lemma and_imp_dist : forall A B C D:Prop,
+   (A -> B) /\ (C -> D) -> A /\ C -> B /\ D.
+Proof.
+    intros A B C D [f g] [a c].
+    split.
+    apply f.
+    exact a.
+    apply g.
+    exact c.
+Qed.
+
+
+Lemma not_contrad : forall A : Prop, ~(A /\ ~A).
+Proof.
+    unfold not.
+    intros A [a na].
+    apply na.
+    exact a.
+Qed.
+
+Lemma absurd : forall A : Prop, False -> A.
+Proof.
+    intro A.
+    assert (False -> A -> False).
+    intros.
+    exact H.
+    apply neg_intro.
+
+
+Lemma or_and_not : forall A B : Prop, (A\/B)/\~A -> B.
+Proof.
+    unfold not.
+    intros A B [aob na].
+    destruct aob as [p | q].
+    assert (False -> B).
+    intros.
+
+
+Qed.
 
 
 

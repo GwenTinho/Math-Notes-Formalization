@@ -7,6 +7,8 @@ Require Import Ring.
 Variable V:Type.
 
 (* G is not an empty set. At least one element exists. *)
+
+
 Variable
     (F: Type)
     (f0: F)
@@ -15,8 +17,13 @@ Variable
     (fmul : F -> F -> F)
     (fainv: F -> F)
     (fminv: F -> F)
-    (afield: field_theory f0 f1 fadd fmul (fun x y => fadd x (fainv y)) fainv (fun x y => fmul x (fminv y)) fminv eq)
+    (fminus: F -> F -> F)
+    (fdiv: F -> F -> F)
+    (afield: field_theory f0 f1 fadd fmul fminus fainv fdiv fminv eq)
     .
+
+
+
 
 Variable e:V.
 Variable inv:V->V.
@@ -48,15 +55,14 @@ Proof.
     reflexivity.
 Qed.
 
-Lemma f0_not_f1: f0 <> f1.
-Proof.
-    intro.
-
-Qed.
 
 
 Lemma zero_times: forall u: V, f0 * u = e.
 Proof.
     intro.
+    Add Field M: afield.
+    intuition.
+
+
 
 Qed.
