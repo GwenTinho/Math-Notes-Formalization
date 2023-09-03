@@ -21,6 +21,9 @@ Local Arguments Empty_set {U}.
 Local Arguments Full_set {U}.
 
 
+Inductive FamilyUnion {X I} (F : I -> Ensemble X): Ensemble X :=
+| Union_intro : forall x:X, forall i:I, x in (F i) -> x in (FamilyUnion F).
+
 Theorem intersection_char {X} (A B : Ensemble X) x :
     (x in A inter B) = (x in A /\ x in B).
 Proof.
@@ -44,6 +47,7 @@ Proof.
     destruct p; auto.
     intros []; auto with sets.
 Qed.
+
 
 Theorem empty_char {X}  (x : X) :
     x in Empty_set = False.
